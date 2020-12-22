@@ -3,7 +3,7 @@ Simple demo of [Lightbend Config](https://github.com/lightbend/config) usage.
 
 ## Build
 
-TODO
+`sbt assembly` will build the a fat jar of the application with all dependencies.
 
 ## Run
 

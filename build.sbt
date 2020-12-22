@@ -19,5 +19,16 @@ lazy val root = (project in file(".")).
 				lightbendConfig,
 				pureconfig,
 				scalaTest % Test
-			)
+			),
+			assembly / mainClass := Some("org.jro.configdemo.Main"),
+			assembly / test := {},
+			assembly / assemblyMergeStrategy := {
+				case "reference.conf"			=> MergeStrategy.concat
+				case "application-fixed.conf"	=> MergeStrategy.concat
+				case "application-runtime.conf"	=> MergeStrategy.discard
+				case x =>
+					val oldStrategy = (assemblyMergeStrategy in assembly).value
+					oldStrategy(x)
+			},
+			assembly / assemblyJarName := s"${name.value}-${version.value}-with-dependencies.jar"
 		)
