@@ -5,7 +5,7 @@ ARG USER_ID=1001
 ARG GROUP_ID=1001
 ARG BASE_IMAGE_TAG=11-jdk-slim
 
-FROM openjdk:${BASE_IMAGE_TAG} as builder
+FROM openjdk:${BASE_IMAGE_TAG}
 
 # Env variables
 ARG SCALA_VERSION
