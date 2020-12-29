@@ -11,6 +11,7 @@ import pureconfig.generic.auto._
 object Main extends App {
 	val configNameSpace = "org.jro.scratchpad.configdemo"
 	val configRendering: ConfigRenderOptions = ConfigRenderOptions.defaults().setFormatted(true)
+	//TODO maybe reverse loading order of configs:
 	val config = ConfigFactory.load("application-fixed.conf").withFallback(ConfigFactory.load())
 	println(s"lightbend config for $configNameSpace: ${config.getConfig(configNameSpace).root().render(configRendering)}")
 
