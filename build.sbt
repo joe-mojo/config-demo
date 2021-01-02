@@ -7,7 +7,7 @@ lazy val root = (project in file(".")).
 			inThisBuild(List(
 				organization := "org.jro",
 				scalaVersion := "2.13.3",
-				version      := "0.1.0"
+				version      := "0.1.1"
 			)),
 			name := "config-demo",
 			scalacOptions ++= Seq(
