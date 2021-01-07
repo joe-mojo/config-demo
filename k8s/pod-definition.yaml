@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: config-demo-pod
+  labels:
+    app-name: config-demo
+spec:
+  containders:
+    - name: config-demo-container
+      image: joe-mojo/config-demo
