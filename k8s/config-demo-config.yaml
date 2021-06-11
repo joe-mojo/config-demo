@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config-demo-config
+data:
+  application-runtime.conf: |
+    org.jro.scratchpad.configdemo {
+        kafka {
+            consumer {
+                bootstrap-servers: [
+                    {host: "broker1", port: ${org.jro.scratchpad.configdemo.kafka.default-port}},
+                    {host: "broker3", port: ${org.jro.scratchpad.configdemo.kafka.default-port}},
+                    {host: "broker2", port: ${org.jro.scratchpad.configdemo.kafka.default-port}}
+                ]
+            }
+            producer {
+                bootstrap-servers: ${org.jro.scratchpad.configdemo.kafka.consumer.bootstrap-servers}
+            }
+        }
+    }

@@ -5,6 +5,38 @@ metadata:
   labels:
     app-name: config-demo
 spec:
-  containders:
-    - name: config-demo-container
-      image: joe-mojo/config-demo
+  restartPolicy: Never
+  securityContext:
+    runAsUser: 10002
+    runAsGroup: 10002
+    fsGroup: 11002
+    runAsNonRoot: true
+  containers:
+  - name: config-demo-container
+    image: joe-mojo/config-demo:latest
+    #Use only cached image for demo purpose. Usually, you should use "Always"
+    imagePullPolicy: Never
+    securityContext:
+      privileged: false
+      readOnlyRootFilesystem: true
+      allowPrivilegeEscalation: false
+    env:
+      - name: APP_NAME
+        value: "K8SConfigDemo"
+      - name: INSTANCE_ID
+        #FIXME var ref is not working
+        value: $(HOSTNAME)
+    volumeMounts:
+      - name: config-volume
+        mountPath: /config-demo/config
+    resources:
+      limits:
+        cpu: 2
+        memory: "256Mi"
+      requests:
+        cpu: 0.25
+        memory: "96Mi"
+  volumes:
+    - name: config-volume
+      configMap:
+        name: config-demo-config

@@ -15,8 +15,8 @@ docker build \
 --build-arg BASE_IMAGE_TAG="11-jdk-slim" \
 --build-arg SBT_VERSION="${SBT_VERSION}" \
 --build-arg SCALA_VERSION="${SCALA_VERSION}" \
---build-arg USER_ID=1001 \
---build-arg GROUP_ID=1001 \
+--build-arg USER_ID=10001 \
+--build-arg GROUP_ID=10001 \
 -t joe-mojo/scala-sbt \
 -f builder.Dockerfile \
 .
