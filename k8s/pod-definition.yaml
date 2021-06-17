@@ -24,8 +24,9 @@ spec:
       - name: APP_NAME
         value: "K8SConfigDemo"
       - name: INSTANCE_ID
-        #FIXME var ref is not working
-        value: $(HOSTNAME)
+        valueFrom:
+          fieldRef:
+            fieldPath: metadata.name
     volumeMounts:
       - name: config-volume
         mountPath: /config-demo/config
