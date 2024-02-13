@@ -6,7 +6,7 @@ lazy val root = (project in file(".")).
 		settings(
 			inThisBuild(List(
 				organization := "org.jro",
-				scalaVersion := "2.13.3",
+				scalaVersion := "2.13.12",
 				version      := "0.1.1"
 			)),
 			name := "config-demo",
@@ -27,7 +27,7 @@ lazy val root = (project in file(".")).
 				case "application-fixed.conf"	=> MergeStrategy.concat
 				case "application-runtime.conf"	=> MergeStrategy.discard
 				case x =>
-					val oldStrategy = (assemblyMergeStrategy in assembly).value
+					val oldStrategy = (assembly / assemblyMergeStrategy).value
 					oldStrategy(x)
 			},
 			assembly / assemblyJarName := s"${name.value}-${version.value}-with-dependencies.jar"
