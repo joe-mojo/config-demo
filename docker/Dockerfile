@@ -1,4 +1,4 @@
-ARG BASE_IMAGE_TAG="11-jre-slim"
+ARG BASE_IMAGE_TAG="21-jre-slim"
 FROM joe-mojo/scala-sbt:latest AS builder
 WORKDIR /config-demo/
 COPY build.sbt build.sbt

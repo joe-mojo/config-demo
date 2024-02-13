@@ -1,9 +1,9 @@
 #Inspired by https://github.com/hseeberger/scala-sbt/blob/master/debian/Dockerfile
-ARG SCALA_VERSION=2.13.4
-ARG SBT_VERSION=1.4.3
+ARG SCALA_VERSION=2.13.12
+ARG SBT_VERSION=1.9.8
 ARG USER_ID=1001
 ARG GROUP_ID=1001
-ARG BASE_IMAGE_TAG=11-jdk-slim
+ARG BASE_IMAGE_TAG=21-jdk-slim
 
 FROM openjdk:${BASE_IMAGE_TAG}
 
@@ -19,14 +19,20 @@ ENV USER_ID=${USER_ID}
 ENV GROUP_ID=${GROUP_ID}
 
 # Install sbt
-RUN \
-  apt-get update && \
-  apt-get install -y curl && \
-  curl -L -o sbt-$SBT_VERSION.deb https://dl.bintray.com/sbt/debian/sbt-$SBT_VERSION.deb && \
-  dpkg -i sbt-$SBT_VERSION.deb && \
-  rm sbt-$SBT_VERSION.deb && \
-  apt-get update && \
-  apt-get install sbt rpm -y
+#RUN \
+#  apt-get update && \
+#  apt-get install -y curl && \
+#  curl -L -o sbt-$SBT_VERSION.deb https://dl.bintray.com/sbt/debian/sbt-$SBT_VERSION.deb && \
+#  dpkg -i sbt-$SBT_VERSION.deb && \
+#  rm sbt-$SBT_VERSION.deb && \
+#  apt-get update && \
+#  apt-get install sbt rpm -y
+RUN apt-get update && apt-get install apt-transport-https curl gnupg -yqq && \
+    echo "deb https://repo.scala-sbt.org/scalasbt/debian all main" | tee /etc/apt/sources.list.d/sbt.list && \
+    echo "deb https://repo.scala-sbt.org/scalasbt/debian /" | tee /etc/apt/sources.list.d/sbt_old.list && \
+    curl -sL "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x2EE0EA64E40A89B84B2DF73499E82A75642AC823" | gpg --no-default-keyring --keyring gnupg-ring:/etc/apt/trusted.gpg.d/scalasbt-release.gpg --import && \
+    chmod 644 /etc/apt/trusted.gpg.d/scalasbt-release.gpg && \
+    apt-get update && apt-get install sbt -yqq
 
 # Install Scala
 ## Piping curl directly in tar
@@ -70,4 +76,3 @@ RUN \
 ## -u sbtuser
 ## -w /home/sbtuser
 WORKDIR /root
-

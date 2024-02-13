@@ -41,7 +41,12 @@ Not providing the configuration variables provided in the sample config will abo
 
 #### Launch
 
-TODO
+`TODO`
+
+## TODO
+
+1. Change docker image form JDK/JRE due to RedHat stopping openjdk repository support.
+2. Launch doc
 
 [1]: ./src/main/resources/reference.conf
 [2]: ./src/main/resources/application-fixed.conf

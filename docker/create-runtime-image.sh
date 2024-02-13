@@ -13,7 +13,7 @@ APP_VERSION=$(grep version ../build.sbt | grep -v value | cut -d '=' -f 2 | cut 
 echo "Building config-demo-${APP_VERSION} image with: SBT_VERSION=${SBT_VERSION} and SCALA_VERSION_DIR=${SCALA_VERSION_DIR}"
 
 docker build \
---build-arg BASE_IMAGE_TAG="11-jre-slim" \
+--build-arg BASE_IMAGE_TAG="21-jre-slim" \
 --build-arg SCALA_VERSION_DIR=${SCALA_VERSION_DIR} \
 --build-arg APP_VERSION=${APP_VERSION} \
 -t joe-mojo/config-demo:${APP_VERSION} \

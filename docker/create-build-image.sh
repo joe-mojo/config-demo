@@ -12,7 +12,7 @@ SCALA_VERSION=$(grep scalaVersion ../build.sbt | cut -d '=' -f 2 | cut -d '"' -f
 echo "Building scala-sbt image with: SBT_VERSION=$SBT_VERSION and SCALA_VERSION=$SCALA_VERSION"
 
 docker build \
---build-arg BASE_IMAGE_TAG="11-jdk-slim" \
+--build-arg BASE_IMAGE_TAG="21-jdk-slim" \
 --build-arg SBT_VERSION="${SBT_VERSION}" \
 --build-arg SCALA_VERSION="${SCALA_VERSION}" \
 --build-arg USER_ID=1001 \
