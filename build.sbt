@@ -15,7 +15,7 @@ lazy val root = (project in file(".")).
 				"-Xmacro-settings:materialize-derivations"
 			),
 			libraryDependencies ++= Seq(
-				playJson,
+				//playJson,
 				lightbendConfig,
 				pureconfig,
 				scalaTest % Test
